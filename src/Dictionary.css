@@ -2,3 +2,26 @@ form {
   max-width: 400px;
   margin: 0 auto;
 }
+.Results {
+  margin: 20px;
+  padding: 20px;
+}
+.Meaning {
+  margin: 10px 0;
+}
+h2 {
+  color: blueviolet;
+  font-style: bold;
+  font-size: 32px;
+}
+h3 {
+  color: blueviolet;
+  font-style: italic;
+  font-size: 20px;
+}
+.Definition {
+  color: blueviolet;
+}
+.Example {
+  color: blueviolet;
+}
