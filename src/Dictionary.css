@@ -1,27 +1,18 @@
-form {
-  max-width: 400px;
-  margin: 0 auto;
-}
-.Results {
-  margin: 20px;
-  padding: 20px;
-}
-.Meaning {
-  margin: 10px 0;
-}
-h2 {
-  color: blueviolet;
-  font-style: bold;
-  font-size: 32px;
-}
 h3 {
   color: blueviolet;
-  font-style: italic;
-  font-size: 20px;
 }
-.Definition {
-  color: blueviolet;
+form {
+  max-width: 600px;
+  margin: 0 auto;
 }
-.Example {
-  color: blueviolet;
+.btn-primary {
+  background-color: blueviolet;
+  border-color: blueviolet;
+}
+.btn-primary:hover {
+  background-color: rgb(51, 6, 93);
+  border-color: rgb(51, 6, 93);
+}
+.Input {
+  border-color: blueviolet;
 }
