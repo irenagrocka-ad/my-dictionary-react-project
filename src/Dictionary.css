@@ -52,5 +52,6 @@ section {
 @media screen and (max-width: 500px) {
   .Dictionary {
     padding: 10px;
+    margin: 0;
   }
 }
