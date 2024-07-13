@@ -19,6 +19,7 @@ export default function Dictionary(props) {
             search(props.defaultKeyword);
             setLoaded(true);
         }
+        // eslint-disable-next-line
     }, [loaded, props.defaultKeyword]);
 
     async function handleResponse(response) {
