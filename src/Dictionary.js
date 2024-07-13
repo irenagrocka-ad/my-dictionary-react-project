@@ -21,7 +21,13 @@ export default function Dictionary(props) {
         const filteredPhonetics = phoneticData.filter(phonetic => phonetic.audio && phonetic.text);
         setPhonetics(filteredPhonetics);
     }
+    async function handlePexelsResponse(response) {
+        console.log(response.data);  // Log the response for debugging
+    }
 
+    function handlePexelsError(error) {
+        console.error("Error fetching data from Pexels API:", error);
+    }
     async function search() {
         setPhonetics(null); // Clear previous phonetics
         const apiKey = "3doat099fbcfb24e74ea400f10f43b8a";
@@ -37,6 +43,13 @@ export default function Dictionary(props) {
         } catch (error) {
             console.error("Error fetching data from APIs:", error);
         }
+
+        const pexelsApiKey = "G4qkhmX4cPFM5iCz8yJxFmvYqSUrHHFTWYsM2mvFz3g3JETgQdwJ3PMQ";
+        const pexelsApiURL = `https://api.pexels.com/v1/search?query=${keyword}&per_page=1`;
+        const headers = { Authorization: `Bearer ${pexelsApiKey}` };
+        axios.get(pexelsApiURL, { headers: headers })
+            .then(handlePexelsResponse)
+            .catch(handlePexelsError);
     }
 
     function handleSubmit(event) {
