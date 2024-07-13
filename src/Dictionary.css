@@ -1,11 +1,21 @@
-h3 {
-  color: blueviolet;
+h4 {
+  color: rgb(51, 6, 93);
+  opacity: 0.8;
+  font-size: 16px;
+}
+.hint {
+  color: rgb(51, 6, 93);
+  opacity: 0.6;
+  font-style: italic;
+  font-size: 12px;
+  margin: 7px;
 }
 form {
   max-width: 600px;
   margin: 0 auto;
 }
 .btn-primary {
+  margin: 5px;
   background-color: blueviolet;
   border-color: blueviolet;
 }
@@ -14,5 +24,17 @@ form {
   border-color: rgb(51, 6, 93);
 }
 .Input {
+  margin: 5px;
   border-color: blueviolet;
+}
+
+section {
+  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
+  max-width: 800px;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 15px 15px rgba(51, 6, 93, 0.3);
 }

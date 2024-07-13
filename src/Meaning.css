@@ -1,11 +1,52 @@
 .Meaning {
-  margin: 10px 0;
+  margin: 0px 0;
 }
 h3 {
   color: blueviolet;
-  font-style: italic;
-  font-size: 20px;
+  font-style: bold;
+  font-size: 24px;
 }
 .describe {
+  margin: 0px;
   color: blueviolet;
+}
+.definition {
+  font-size: 16px;
+  margin-bottom: 2px;
+}
+.example {
+  font-size: 14px;
+  font-style: italic;
+  opacity: 0.8;
+  margin-bottom: 2px;
+}
+.synonyms {
+  font-size: 14px;
+  margin: 5px;
+}
+.synonyms li {
+  display: inline-block; /* Display inline to show next to each other */
+  padding-right: 10px; /* Adjust spacing between synonyms */
+  padding-right: 20px;
+  font-size: 14px;
+}
+
+@media only screen and (max-width: 500px) {
+  h3 {
+    font-size: 18px;
+  }
+  .definition {
+    font-size: 14px;
+  }
+  .example {
+    font-size: 12px;
+  }
+  .synonyms {
+    font-size: 12px;
+  }
+
+  .synonyms li {
+    padding-right: 10px;
+    font-size: 12px;
+  }
 }
