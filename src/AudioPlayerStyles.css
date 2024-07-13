@@ -1,0 +1,24 @@
+Copy code
+/* AudioPlayerStyles.css */
+.rhap_container {
+  background-color: #f0f0f0; /* Change the background color */
+  border-radius: 60px; /* Rounded corners */
+  padding: 10px; /* Padding around the player */
+}
+
+.rhap_play-pause-button {
+  color: blueviolet; /* Change the color of the play/pause button */
+}
+
+.rhap_progress-bar {
+  background-color: #d3d3d3; /* Change the background color of the progress bar */
+}
+
+.rhap_progress-indicator {
+  background-color: blueviolet; /* Change the color of the progress indicator */
+}
+
+.rhap_volume-button,
+.rhap_volume-bar {
+  color: blueviolet; /* Change the color of the volume button and bar */
+}
