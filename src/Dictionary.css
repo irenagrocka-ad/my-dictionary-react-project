@@ -1,3 +1,13 @@
+.Dictionary {
+  max-width: 1400px;
+  background-size: cover;
+  background-position: center;
+  margin: 20px;
+  padding: 50px;
+  min-height: 100vh;
+  border-radius: 10px;
+  box-shadow: 0 15px 15px rgba(51, 6, 93, 0.3);
+}
 h4 {
   color: rgb(51, 6, 93);
   opacity: 0.8;
@@ -29,6 +39,7 @@ form {
 }
 
 section {
+  background-color: rgba(255, 255, 255, 0.8);
   margin-top: 20px;
   align-items: center;
   justify-content: center;
@@ -37,4 +48,9 @@ section {
   margin: 20px auto;
   border-radius: 10px;
   box-shadow: 0 15px 15px rgba(51, 6, 93, 0.3);
+}
+@media screen and (max-width: 500px) {
+  .Dictionary {
+    padding: 10px;
+  }
 }

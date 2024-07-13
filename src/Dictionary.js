@@ -1,19 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Results from "./Results";
 import Phonetics from "./Phonetics";
+import Photos from "./Photos";
 
 import './Dictionary.css';
 
 export default function Dictionary(props) {
-    let [keyword, setKeyword] = useState(props.defaultKeyword);
-    let [results, setResults] = useState(null);
-    let [phonetics, setPhonetics] = useState(null);
-    let [loaded, setLoaded] = useState(false);
+    const [keyword, setKeyword] = useState(props.defaultKeyword);
+    const [results, setResults] = useState(null);
+    const [phonetics, setPhonetics] = useState(null);
+    const [loaded, setLoaded] = useState(false);
+    const [photos, setPhotos] = useState([]);
+    const [backgroundImage, setBackgroundImage] = useState(null);
+
+    useEffect(() => {
+        if (!loaded) {
+            search(props.defaultKeyword);
+            setLoaded(true);
+        }
+    }, [loaded, props.defaultKeyword]);
 
     async function handleResponse(response) {
-        console.log(response.data);
         setResults(response.data);
+        const imagesApiKey = "3doat099fbcfb24e74ea400f10f43b8a";
+        const imagesApiURL = `https://api.shecodes.io/images/v1/search?query=${response.data.word}&key=${imagesApiKey}`;
+        const headers = { Authorization: `Bearer ${imagesApiKey}` };
+
+        axios
+            .get(imagesApiURL, { headers: headers })
+            .then(handleImages);
     }
 
     async function handlePhonetics(response) {
@@ -21,64 +37,57 @@ export default function Dictionary(props) {
         const filteredPhonetics = phoneticData.filter(phonetic => phonetic.audio && phonetic.text);
         setPhonetics(filteredPhonetics);
     }
-    async function handlePexelsResponse(response) {
-        console.log(response.data);  // Log the response for debugging
+
+    function handleImages(response) {
+        const photosData = response.data.photos;
+        setPhotos(photosData);
+        if (photosData.length > 0) {
+            setBackgroundImage(photosData[0].src.landscape);
+        }
     }
 
-    function handlePexelsError(error) {
-        console.error("Error fetching data from Pexels API:", error);
-    }
-    async function search() {
+    async function search(searchKeyword) {
         setPhonetics(null); // Clear previous phonetics
         const apiKey = "3doat099fbcfb24e74ea400f10f43b8a";
-        const apiURL = `https://api.shecodes.io/dictionary/v1/define?word=${keyword}&key=${apiKey}`;
+        const apiURL = `https://api.shecodes.io/dictionary/v1/define?word=${searchKeyword}&key=${apiKey}`;
 
         try {
             const response = await axios.get(apiURL);
             await handleResponse(response);
 
-            const apiURL2 = `https://api.dictionaryapi.dev/api/v2/entries/en/${keyword}`;
+            const apiURL2 = `https://api.dictionaryapi.dev/api/v2/entries/en/${searchKeyword}`;
             const phoneticsResponse = await axios.get(apiURL2);
             await handlePhonetics(phoneticsResponse);
         } catch (error) {
             console.error("Error fetching data from APIs:", error);
         }
 
-        const pexelsApiKey = "G4qkhmX4cPFM5iCz8yJxFmvYqSUrHHFTWYsM2mvFz3g3JETgQdwJ3PMQ";
-        const pexelsApiURL = `https://api.pexels.com/v1/search?query=${keyword}&per_page=1`;
-        const headers = { Authorization: `Bearer ${pexelsApiKey}` };
-        axios.get(pexelsApiURL, { headers: headers })
-            .then(handlePexelsResponse)
-            .catch(handlePexelsError);
     }
 
     function handleSubmit(event) {
         event.preventDefault();
-        search(); // Prevent the form from submitting
+        search(keyword);
     }
 
     function handleKeywordChange(event) {
         setKeyword(event.target.value);
     }
 
-    function load() {
-        setLoaded(true);
-        search();
-    }
-
     if (!loaded) {
-        load();
         return "Loading...";
     }
 
     return (
-        <div className="Dictionary">
+        <div className="Dictionary" style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover' }}>
             <section>
+                <header className="App-header">
+                    <h1>Dictionary</h1>
+                </header>
                 <form onSubmit={handleSubmit}>
                     <h4>What word do you want to look up?</h4>
                     <div className="row">
                         <div className="col-md-9">
-                            <input type="search" className="form-control Input" autoFocus={true} placeholder="Enter a word... " onChange={handleKeywordChange} />
+                            <input type="search" className="form-control Input" autoFocus={true} placeholder="Enter a word..." value={keyword} onChange={handleKeywordChange} />
                             <div className="hint">Suggests words: sunset, book, water, chocolate....</div>
                         </div>
                         <div className="col-md-3">
@@ -87,13 +96,12 @@ export default function Dictionary(props) {
                     </div>
                 </form>
             </section>
+            {results && <Results results={results} />}
 
             {phonetics && phonetics.map((phonetic, index) => (
                 <Phonetics key={index} phonetic={phonetic} />
             ))}
-
-            {results && <Results results={results} />}
+            <Photos photos={photos} />
         </div>
     );
 }
-

@@ -7,11 +7,8 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-        <header className="App-header">
-          <h1>Dictionary</h1>
-        </header>
         <main>
-          <Dictionary defaultKeyword="mountain" />
+          <Dictionary defaultKeyword="rainbow" />
         </main>
 
         <Footer />
